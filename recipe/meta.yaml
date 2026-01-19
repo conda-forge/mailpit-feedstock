@@ -1,4 +1,4 @@
-{% set version = "1.28.2" %}
+{% set version = "1.28.3" %}
 
 package:
   name: mailpit
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/axllent/mailpit/archive/v{{ version }}.tar.gz
-  sha256: c3b74fcd7acbfb93c71e213d3e3c56f6cbd680944fe1a41339e99821c7b94acc
+  sha256: a434a76acdf4aaaba8856396a1405867ff92a796e5cef4e8d62bad6ba8bc8374
 
 build:
   number: 0
