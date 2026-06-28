@@ -1,30 +1,38 @@
-{% set version = "1.30.3" %}
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: "1.30.3"
 
 package:
   name: mailpit
-  version: {{ version }}
+  version: ${{ version }}
 
 source:
-  url: https://github.com/axllent/mailpit/archive/v{{ version }}.tar.gz
+  url: https://github.com/axllent/mailpit/archive/v${{ version }}.tar.gz
   sha256: 1e6a94e92b5e6ebbdaed7ec2dd280b7d200185697d723044c5a9fc239fcdb6d8
 
 build:
-  number: 0
+  number: 1
+  script:
+    - if: unix
+      then: build.sh
+    - if: win
+      then: build.bat
 
 requirements:
   build:
-    - {{ compiler('go-cgo') }}
-    - {{ compiler('c') }}
-    - {{ stdlib('c') }}
+    - ${{ compiler('go-cgo') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
     - go-licenses
     - nodejs >=18
 
-test:
-  commands:
-    - mailpit --help
+tests:
+  - script:
+      - mailpit --help
 
 about:
-  home: https://github.com/axllent/mailpit
   summary: A small, fast, low memory, zero-dependency, multi-platform email testing tool & API for developers
   description: |
     Mailpit is an email testing tool for developers. It acts as an SMTP server,
@@ -43,8 +51,9 @@ about:
   license_file:
     - LICENSE
     - library_licenses/
-  doc_url: https://mailpit.axllent.org/docs/
-  dev_url: https://github.com/axllent/mailpit
+  homepage: https://github.com/axllent/mailpit
+  repository: https://github.com/axllent/mailpit
+  documentation: https://mailpit.axllent.org/docs/
 
 extra:
   recipe-maintainers:
